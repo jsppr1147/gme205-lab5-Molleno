@@ -1,8 +1,8 @@
 Laboratory Exercise 5: Object-Oriented Spatial Modeling with UML  
 -----------------------------------------------------------------
-Part A: Project setup and reproducible environment
- -A directory for diagram, output, src, and tests are created.
- -gitignore, README.md, requirements.txt and pytest.ini is created.
+Part A: Project setup and reproducible environment  
+ - A directory for diagram, output, src, and tests are created.
+ - gitignore, README.md, requirements.txt and pytest.ini is created.
  - Under the src, assessment.py, demo.py, rules.py, run_lab.py and spatial.py is created.
  - Under the tests, test_assessment.py, test_rules.py and test_spatial.py  
  - https://github.com/jsppr1147/gme205-lab5-Molleno.git is the repository.  
@@ -16,4 +16,14 @@ Part A: Project setup and reproducible environment
 
 - I have attached a snap shot of the tables i used in my candidate nouns and candidate verbs and my rationale for putting it there.  
 - The candidate noun for assessment rule shows the abstraction and polymorphism requried for this exercise since you can call a rule.screen(parcel) to evaluate the parcels based on rules depending on which object is running it.  
-- apart from the given in the lab manual, i added some candidate nouns like the "zoning classification" or "parcel assessment".  
+- Apart from the given in the lab manual, i added some candidate nouns like the "zoning classification" or "parcel assessment".  
+
+Part C: Building the UML Model Step by Step  
+- Based from the Part B tables created, the UML model is created one by one. 
+- As for the relationships:
+    1. the 3 rules "IS AN" AssessmentRule. It shows an inheritance type of relationship and Hollow Triangle symbol.  
+    2. ParcelAssessment "Has A" Parcel. This shows the composition type of relationship. uses a Solid diamond symbol. It has a multiplicity symbol of 1 because it "HAS EXACTLY 1" parcel.  
+    3. ParcelAssessment also "Has AN" AssessmentRule. Solid diamond symbol. However it has a "1..*" symbol which indicate that it must hold at least 1 rule to run, but it can also hold a lsit of many rules.  
+    4. NoHazardOverlapRule "Has A" HazardZone. This shows a association type of relationship. Uses a plain line since the hazard exists independently of the rule. Also with multiplicity of 1 since it uses 1 hazard.  
+    5. AssessmentRule "Uses A" RuleResults. this is a dependancy type of relationship. Uses a dashed arrow with no multiplicity value but there is a label 'returns' since it simply create and returns results but it doesnt store them. 
+- A UML diagram was created based on Part B and the relationships mentioned.
