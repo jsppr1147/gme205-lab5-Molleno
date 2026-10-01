@@ -25,6 +25,8 @@ class AssessmentRule(ABC):
     def evaluate(self, parcel) -> RuleResult: 
         pass
 
+    def passed(self):
+        return all(result.passed for result in self.evaluate())
 
 
 class MinimumAreaRule(AssessmentRule): 
@@ -55,5 +57,21 @@ class AllowedZoneRule(AssessmentRule):
             f"Zone {parcel.zone} is allowed"
             if passed
             else f"Zone {parcel.zone} not in {sorted(self._allowed_zones)}"
+        )
+        return RuleResult(self.name, passed, message)
+
+
+class NoHazardOverlapRule(AssessmentRule):
+    def __init__(self, hazard_zone):
+        super().__init__("No hazard overlap")
+        self._hazard_zone = hazard_zone
+
+    def evaluate(self, parcel):
+        overlaps = parcel.intersects(self._hazard_zone)
+        passed = not overlaps          # pass only when there is NO intersection
+        message = (
+            f"No overlap with {self._hazard_zone.zone_id}"
+            if passed
+            else f"Overlaps {self._hazard_zone.hazard_type} zone {self._hazard_zone.zone_id}"
         )
         return RuleResult(self.name, passed, message)
