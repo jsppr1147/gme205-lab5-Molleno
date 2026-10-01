@@ -40,3 +40,20 @@ class MinimumAreaRule(AssessmentRule):
             else f"{parcel.area_sqm:.0f} m² < {self._min_area:.0f} m²" 
         ) 
         return RuleResult(self.name, passed, message)
+
+
+class AllowedZoneRule(AssessmentRule):
+    def __init__(self, allowed_zones):
+        super().__init__("Allowed zone")
+        self._allowed_zones = set(allowed_zones)
+        if not self._allowed_zones:
+            raise ValueError("allowed_zones cannot be empty")
+
+    def evaluate(self, parcel):
+        passed = parcel.zone in self._allowed_zones
+        message = (
+            f"Zone {parcel.zone} is allowed"
+            if passed
+            else f"Zone {parcel.zone} not in {sorted(self._allowed_zones)}"
+        )
+        return RuleResult(self.name, passed, message)
