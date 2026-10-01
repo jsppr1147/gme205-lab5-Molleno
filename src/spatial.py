@@ -30,3 +30,33 @@ class Parcel:
  
     def intersects(self, other): 
         return self._geometry.intersects(other.geometry) 
+
+
+class HazardZone:
+    """A mapped hazard area; same encapsulation pattern as Parcel."""
+
+    def __init__(self, zone_id, geometry, hazard_type, severity):
+        if not zone_id:
+            raise ValueError("zone_id is required")
+        if not hazard_type:
+            raise ValueError("hazard_type is required")
+        self._zone_id = str(zone_id)
+        self._geometry = geometry
+        self._hazard_type = str(hazard_type)
+        self._severity = str(severity)
+
+    @property
+    def zone_id(self):
+        return self._zone_id
+
+    @property
+    def geometry(self):
+        return self._geometry
+
+    @property
+    def hazard_type(self):
+        return self._hazard_type
+
+    @property
+    def severity(self):
+        return self._severity
