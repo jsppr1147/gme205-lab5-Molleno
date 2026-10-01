@@ -26,4 +26,8 @@ Part C: Building the UML Model Step by Step
     3. ParcelAssessment also "Has AN" AssessmentRule. Solid diamond symbol. However it has a "1..*" symbol which indicate that it must hold at least 1 rule to run, but it can also hold a lsit of many rules.  
     4. NoHazardOverlapRule "Has A" HazardZone. This shows a association type of relationship. Uses a plain line since the hazard exists independently of the rule. Also with multiplicity of 1 since it uses 1 hazard.  
     5. AssessmentRule "Uses A" RuleResults. this is a dependancy type of relationship. Uses a dashed arrow with no multiplicity value but there is a label 'returns' since it simply create and returns results but it doesnt store them. 
-- A UML diagram was created based on Part B and the relationships mentioned.
+- A UML diagram was created based on Part B and the relationships mentioned.  
+
+Part D: Forward Engineering: Convert the UML to Python
+- This is the part where the design is translated in to a python code. 
+- The laboratory manual already given the first few class structures for this part. 
