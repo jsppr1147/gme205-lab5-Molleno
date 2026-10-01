@@ -31,3 +31,13 @@ Part C: Building the UML Model Step by Step
 Part D: Forward Engineering: Convert the UML to Python
 - This is the part where the design is translated in to a python code. 
 - The laboratory manual already given the first few class structures for this part. 
+- The HazardZone, AllowedZoneRule, and NoHazardOverlapRule were created based on the template of the MinimumAreaRule given in the laboratory exercise manual.  
+- The spatial.py and rules.py were updated according to the parts objectives. 
+
+Moving forward to Part E: Showing the Four Pillars in the Converted Code  
+- After translating the design into code, it is important to show also the four pillar in OOP: the encapsulation, Abstraction, Inheritance, and Polymorphism.
+- Part D already showed the encapsulation in the Parcel and HazardZone classes.
+- Part D already showed the Abstraction in the AssessmentRule Class in rules.py.  
+- Part D already showed the Inheritance in the 3 rules in the rules.py
+- Part E now is tasked to implement the polymorphism to completely showcase the four pillars in OOP.
+- The ParcelAssessment class in the assessment.py loop showcases polymorphism and composition relationship to the Parcel and Assessment Rule. 

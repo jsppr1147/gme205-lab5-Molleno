@@ -25,9 +25,6 @@ class AssessmentRule(ABC):
     def evaluate(self, parcel) -> RuleResult: 
         pass
 
-    def passed(self):
-        return all(result.passed for result in self.evaluate())
-
 
 class MinimumAreaRule(AssessmentRule): 
     def __init__(self, min_area): 
