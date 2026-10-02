@@ -150,3 +150,4 @@ elif rule_type == "road_access":
   
 With this design the coordinator must know every rule type. Each new rule means editing code that already works, which risks breaking the existing rules, and the if/elif chain grows with every rule. The polymorphic design extends the model by adding a class instead of modifying the loop.  
 ========================================================================================================================  
+
