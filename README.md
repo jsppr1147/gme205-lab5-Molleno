@@ -41,3 +41,12 @@ Moving forward to Part E: Showing the Four Pillars in the Converted Code
 - Part D already showed the Inheritance in the 3 rules in the rules.py
 - Part E now is tasked to implement the polymorphism to completely showcase the four pillars in OOP.
 - The ParcelAssessment class in the assessment.py loop showcases polymorphism and composition relationship to the Parcel and Assessment Rule. 
+
+Part F: Running a fix spatial scenario.
+- For this part, I created the runner script for the verification if the model works properly.
+- A shared scenario for the parcel A, parcel B, and HazardZone was created to test if the algorithm works.
+- asdict(r) turns the RuleResult dataclass into a plain dict with exactly the keys the required JSON shape asks for (rule_name, passed, message)
+- The Shapely geometry also never enters the JSON. Only the id, booleans, and the strings do.
+- There's also no visible responsibility leaks like there are no "DECISION" logic (i.e. area > 5000) showing in the runner script.
+- One rule list is also shared by both parcels since the rules only hold the configuration (threshold, zoneset, hazard ) and no parcel state.
+- Upon checking, using the scenario from the manual yields the P-001 as passed: false and P-002 as passed : true
