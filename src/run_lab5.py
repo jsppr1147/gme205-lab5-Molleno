@@ -3,10 +3,10 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from shapely.geometry import box
+from shapely.geometry import box, LineString
 
-from spatial import Parcel, HazardZone
-from rules import MinimumAreaRule, AllowedZoneRule, NoHazardOverlapRule
+from spatial import Parcel, HazardZone, Road
+from rules import MinimumAreaRule, AllowedZoneRule, NoHazardOverlapRule, RoadAccessRule
 from assessment import ParcelAssessment
 
 
@@ -15,12 +15,14 @@ def main():
     parcel_a = Parcel("P-001", box(0, 0, 80, 90), "Residential", 7200)
     parcel_b = Parcel("P-002", box(120, 0, 190, 80), "Commercial", 5600)
     hazard = HazardZone("HZ-01", box(60, 50, 110, 100), "Flood", "High")
+    road = Road("R-01", LineString([(0, -10), (190, -10)])) #updated spatial objects to include a road for the RoadAccessRule
 
     # 2. rule objects (stateless, so one list can serve every parcel)
     rules = [
         MinimumAreaRule(5000),
         AllowedZoneRule({"Residential", "Commercial"}),
         NoHazardOverlapRule(hazard),
+        RoadAccessRule(road, 20),  # added RoadAccessRule to the rules list
     ]
 
     # 3-5. compose, evaluate, assemble JSON-ready dicts

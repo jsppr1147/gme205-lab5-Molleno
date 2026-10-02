@@ -1,7 +1,7 @@
 import pytest
-from shapely.geometry import box
-from spatial import Parcel, HazardZone
-from rules import (RuleResult, AssessmentRule, MinimumAreaRule,
+from shapely.geometry import box, LineString
+from spatial import Parcel, HazardZone, Road
+from rules import (RuleResult, AssessmentRule, MinimumAreaRule, RoadAccessRule,
                    AllowedZoneRule, NoHazardOverlapRule)
 
 
@@ -40,3 +40,12 @@ def test_no_hazard_overlap_fails_when_intersecting(parcel):
 def test_no_hazard_overlap_passes_when_apart(parcel):
     hazard = HazardZone("H-2", box(50, 50, 60, 60), "Flood", "High")
     assert NoHazardOverlapRule(hazard).evaluate(parcel).passed
+
+def test_road_access_passes_when_close(parcel):
+    road = Road("R-1", LineString([(0, -5), (10, -5)]))   # 5 units away
+    assert RoadAccessRule(road, 10).evaluate(parcel).passed
+
+
+def test_road_access_fails_when_far(parcel):
+    road = Road("R-2", LineString([(0, -50), (10, -50)]))  # 50 units away
+    assert not RoadAccessRule(road, 10).evaluate(parcel).passed

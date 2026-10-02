@@ -106,4 +106,8 @@ Part I: Adding the required extension (RoadAccessRule)
 - It also shows that the RoadAccessRule "Has A" Road. This shows a association type of relationship. Uses a plain line too since the road exists independently of the rule. Also with multiplicity of 1 since it uses 1 road.
 - I didn't remove the v0 to simply show the change in the current commit. will remove if necessary.
 - Then i translated the UML similar to the steps before. Road was created under the spatial.py and RoadAccessRule was added to rules.py
-- I checked if it works by adding the rule in the demo.py (added Road scenario for a near and far road)
+- I checked if it works by adding the rule in the demo.py (added Road scenario for a near and far road).
+- Updated the runner script to include the Road scenario and RoadAccessRule.
+- Updated test_rules.py for checking if RoadAccessRule passes when it's close and failing when it's far.
+- Updated test_assessment.py for checking if the new rule shows polymorphism too.
+- the tests updates both passed.
