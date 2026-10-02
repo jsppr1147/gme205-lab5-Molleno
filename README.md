@@ -99,3 +99,9 @@ Part H: Testing the Model, Not Just the Output
 - test_spatial.py protects the encapsulation, meaning that invalid parcels can't exist.
 - test_rules.py to check that each rule work on its own.
 - test_assessment.py to protect the coordinator (ParcelAssessment) and polymorphism. the placed isinstance in this code checks the results shape and doesnt choose a rule implementation.
+
+Part I: Adding the required extension (RoadAccessRule)
+- Before adding the RoadAccessRule and the Road class, the UML for these classes were created. The UMLdiagram_v0 was updated to UMLdiagram_v1.
+- UMLdiagram_v1 shows that the RoadAccessRule "IS AN" AssessmentRule. It shows an inheritance type of relationship and Hollow Triangle symbol.
+- It also shows that the RoadAccessRule "Has A" Road. This shows a association type of relationship. Uses a plain line too since the road exists independently of the rule. Also with multiplicity of 1 since it uses 1 road.
+- I didn't remove the v0 to simply show the change in the current commit. will remove if necessary.
