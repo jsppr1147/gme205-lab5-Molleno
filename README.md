@@ -49,4 +49,26 @@ Part F: Running a fix spatial scenario.
 - The Shapely geometry also never enters the JSON. Only the id, booleans, and the strings do.
 - There's also no visible responsibility leaks like there are no "DECISION" logic (i.e. area > 5000) showing in the runner script.
 - One rule list is also shared by both parcels since the rules only hold the configuration (threshold, zoneset, hazard ) and no parcel state.
-- Upon checking, using the scenario from the manual yields the P-001 as passed: false and P-002 as passed : true
+- Upon checking, using the scenario from the manual yields the P-001 as passed: false and P-002 as passed : true  
+
+Part G: UML-to-Code Consistency Review  
+- For this part, the diagram was compared again to the current version of the code.
+- First is checking if all the UML class exists: 
+    - spatial.py: has the Parcel and HazardZone classes : check!
+    - rules.py: has Abstract(AssessmentRule), 3 rules, and RuleResult : check!
+    - assessment.py: has the ParcelAssessment: check!
+- All classes in UML exist.
+- Second is to check if the __init__ or attributes sit right in their respective classes:
+    - all good and it is not displayed in demo.py and runner_lab5.py
+- Third is to check if the operations in each class match:
+    - intersects in Parcel : check!
+    - evaluate in each rule : check!
+    - passed in ParcelAssessment : check!
+- Fourth is to check if the Inheritance is matching properly:
+    - 3 rules (AssessmentRule) : check!
+- Fifth is to check if Composition is matching properly:
+    - ParcelAssessment.__init__ gets the self.parcel and self.rules : check!
+- Sixth is the Multiplicity listed if it match:
+    - "if not rules : raise ValueError" : check!
+- Lastly for the polymorphism if properly displayed:
+    - in ParcelAssessment.evaluate, it calls the rule.evaluate(self.parcel) without the isinstance.
