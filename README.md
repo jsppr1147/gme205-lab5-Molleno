@@ -111,7 +111,7 @@ Part I: Adding the required extension (RoadAccessRule)
 - Updated test_rules.py for checking if RoadAccessRule passes when it's close and failing when it's far.
 - Updated test_assessment.py for checking if the new rule shows polymorphism too.
 - the tests updates both passed.
-============================================================================================================
+============================================================================================================  
 Short section: Extension without coordinator rewrite
 - Before: 3 rules: (in demo.py before)  
 rules = [
@@ -149,4 +149,4 @@ elif rule_type == "road_access":
 ...  # every new type edits the coordinator again    
   
 With this design the coordinator must know every rule type. Each new rule means editing code that already works, which risks breaking the existing rules, and the if/elif chain grows with every rule. The polymorphic design extends the model by adding a class instead of modifying the loop.  
-========================================================================================================================
+========================================================================================================================  
