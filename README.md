@@ -72,3 +72,14 @@ Part G: UML-to-Code Consistency Review
     - "if not rules : raise ValueError" : check!
 - Lastly for the polymorphism if properly displayed:
     - in ParcelAssessment.evaluate, it calls the rule.evaluate(self.parcel) without the isinstance.
+
+Part H: Testing the Model, Not Just the Output 
+- similar to the previos lab exercise, the test were created to verify if the UML and interfaces were working as intended.
+- test_spatial.py employs 7 tests:
+    1. for exposing valid state: passed
+    2. for rejecting invalid input (no id): passed
+    3. for rejecting invalid input (no zone): passed
+    4. for rejecting invalid input (zero area): passed
+    5. for rejecting invalid input (negative area): passed
+    6. for checking if parcel intersects delegate to geometry: passed
+    7. for testing if hazard zone stores state and rejects missing id: passed
