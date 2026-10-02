@@ -151,3 +151,31 @@ elif rule_type == "road_access":
 With this design the coordinator must know every rule type. Each new rule means editing code that already works, which risks breaking the existing rules, and the if/elif chain grows with every rule. The polymorphic design extends the model by adding a class instead of modifying the loop.  
 ========================================================================================================================  
 
+Part J: ReadME Reflections
+
+1. OOAD: what changed in my thinking when I modeled first?  
+I used to start by writing code and fixing the structure as I went (like writing it on the go, listing all methods then trial and erro like a prcedural workflow). Breaking the problem statement into nouns and verbs first showed me which things deserve to be classes and which object should own each action. For example, passed() belongs in ParcelAssessment because only it sees all the results. Deciding this on paper was a bit easier than discovering it while coding.
+
+2. Candidate classes: a noun I did not make a class.  
+Zoning classification. It is only a value a parcel carries (a string such as "Residential"), with no behavior or identity of its own, so it is an attribute of Parcel. I also kept "report" as a plain dictionary/JSON instead of a class, since it owns no behavior.
+
+3. Encapsulation.  
+Parcel keeps parcel_id, zone, area_sqm, and geometry in private attributes, exposed only through read-only properties. The constructor prevents a missing ID, a blank zone, and a non-positive area, so an invalid parcel can never exist.
+
+4. Abstraction.  
+AssessmentRule promises that every rule has a name and an evaluate(parcel) method that returns a RuleResult. It says nothing about how any particular rule decides.  
+
+5. Inheritance.  
+The concrete rules share the base class' constructor, which stores the name, and the name property. They also share the contract of evaluate(parcel) returning a RuleResult. Each subclass adds only its own configuration (a threshold, a zone set, or a hazard zone) and its own decision logic.  
+
+6. Polymorphism.  
+ParcelAssessment calls rule.evaluate(self._parcel) on every rule through the base-class contract. Every concrete rule fulfils that contract, so the coordinator doesn't need to know which kind of rule it has. Each object responds with its own behavior.  
+
+7. Composition.  
+A ParcelAssessment is not a parcel and is not a rule. It *uses* one parcel and a list of rules, so it stores them as members (has-a). Inheriting would claim a relationship that isn't true and would lock the design into one parcel and one rule type. Composition also lets me swap parcels and rule lists freely.  
+
+8. Extension.  
+I added a Road class and a RoadAccessRule (a new subclass), and added one new object to the rules list. I did not change ParcelAssessment.evaluate() or any of the existing rules.  
+
+9. UML-to-code consistency.  
+When I wasn't sure where passed() should live, i just based it on my diagram: the overall decision needs all results, so it appears in the ParcelAssessment box and not in AssessmentRule. The code was brought in line with that placement.  
