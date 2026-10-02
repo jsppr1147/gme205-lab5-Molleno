@@ -90,3 +90,12 @@ Part H: Testing the Model, Not Just the Output
     4. for allowed zone rejecting empty set: passed
     5. for no hazard overlap fails when intersecting: passed
     6. for no hazard overlap passing when apart: passed 
+- test_assessment.py employs 4 tests:
+    1. for accepting mixed rule subclasses: passed
+    2. for assessment requiring at least 1 rule: passed
+    3. for p001 failing only in hazard rule: passed #scenario specific
+    4. for p002 passing all rules: passed
+
+- test_spatial.py protects the encapsulation, meaning that invalid parcels can't exist.
+- test_rules.py to check that each rule work on its own.
+- test_assessment.py to protect the coordinator (ParcelAssessment) and polymorphism. the placed isinstance in this code checks the results shape and doesnt choose a rule implementation.
