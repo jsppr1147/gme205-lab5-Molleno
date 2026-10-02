@@ -105,3 +105,5 @@ Part I: Adding the required extension (RoadAccessRule)
 - UMLdiagram_v1 shows that the RoadAccessRule "IS AN" AssessmentRule. It shows an inheritance type of relationship and Hollow Triangle symbol.
 - It also shows that the RoadAccessRule "Has A" Road. This shows a association type of relationship. Uses a plain line too since the road exists independently of the rule. Also with multiplicity of 1 since it uses 1 road.
 - I didn't remove the v0 to simply show the change in the current commit. will remove if necessary.
+- Then i translated the UML similar to the steps before. Road was created under the spatial.py and RoadAccessRule was added to rules.py
+- I checked if it works by adding the rule in the demo.py (added Road scenario for a near and far road)
