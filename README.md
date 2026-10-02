@@ -82,4 +82,11 @@ Part H: Testing the Model, Not Just the Output
     4. for rejecting invalid input (zero area): passed
     5. for rejecting invalid input (negative area): passed
     6. for checking if parcel intersects delegate to geometry: passed
-    7. for testing if hazard zone stores state and rejects missing id: passed
+    7. for testing if hazard zone stores state and rejects missing id: passed  
+- test_rules.py employs 6 tests:
+    1. for rule not be instantiated: passed 
+    2. for minimum area passing and failing: passed
+    3. for allowed zone accepting and rejecting: passed
+    4. for allowed zone rejecting empty set: passed
+    5. for no hazard overlap fails when intersecting: passed
+    6. for no hazard overlap passing when apart: passed 
