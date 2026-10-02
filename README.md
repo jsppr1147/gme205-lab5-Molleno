@@ -111,3 +111,42 @@ Part I: Adding the required extension (RoadAccessRule)
 - Updated test_rules.py for checking if RoadAccessRule passes when it's close and failing when it's far.
 - Updated test_assessment.py for checking if the new rule shows polymorphism too.
 - the tests updates both passed.
+============================================================================================================
+Short section: Extension without coordinator rewrite
+- Before: 3 rules: (in demo.py before)  
+rules = [
+    MinimumAreaRule(300),
+    AllowedZoneRule({"Residential"}),
+    NoHazardOverlapRule(hazard),
+    ]
+- Now: 4 rules (in demo.py current)  
+rules = [
+    MinimumAreaRule(300), 
+    AllowedZoneRule({"Residential"}), 
+    NoHazardOverlapRule(hazard),
+    RoadAccessRule(near_road, 10),
+    ]  
+- ParcelAssessment is unchanged. (in assessment.py)
+def evaluate(self): 
+    results = [] 
+    for rule in self._rules: 
+        result = rule.evaluate(self._parcel) 
+        results.append(result) 
+    return results 
+
+- Why this is different from adding an elif branch?:
+The coordinator only calls rule.evaluate(parcel), which is the contract defined by AssessmentRule. It doesn't need to know what kind of rule it holds, so a new rule that honors the contract works with no changes to the loop. Only the code that creates the rule (the runner) knows RoadAccessRule exists.
+
+- Explain why this is a "WEAK" alternative.
+
+if rule_type == "minimum_area":   
+...   
+elif rule_type == "allowed_zone":   
+...   
+elif rule_type == "hazard_overlap":   
+...   
+elif rule_type == "road_access":   
+...  # every new type edits the coordinator again    
+  
+With this design the coordinator must know every rule type. Each new rule means editing code that already works, which risks breaking the existing rules, and the if/elif chain grows with every rule. The polymorphic design extends the model by adding a class instead of modifying the loop.  
+========================================================================================================================
